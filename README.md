@@ -1,31 +1,8 @@
-[![Build Status](https://travis-ci.org/freetonik/underblog.svg?branch=master)](https://travis-ci.org/freetonik/underblog)
-[![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/freetonik/underblog)](https://hub.docker.com/r/freetonik/underblog)
+Fork of [underblog](https://github.com/freetonik/underblog)
 
 # Underblog
 
 An extremely simple, fast static blog generator.
-
-## Deploy to Netlify
-
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/lucas-deangelis/underblog-template)
-
-## Install locally
-
-On MacOS:
-
-```
-brew install freetonik/tap/underblog
-```
-
-Docker:
-
-```
-docker run --rm -it -v /path/to/your/blog:/blog freetonik/underblog
-```
-
-Windows:
-
-Go to [releases](https://github.com/freetonik/underblog/releases) and download the latest binary marked "windows".
 
 ## How it works
 
@@ -36,7 +13,7 @@ You only need 4 things:
 3. `css/styles.css` for CSS styles.
 3. `markdown` folder.
 
-There is no front-matter. **Date** and **slug** are derived from the filename. **Title** is derived from the first line of markdown file. Make sure the first line starts with `#`.
+There is no front-matter. **Slug** is derived from the filename and **date** is the last modification date of the file. **Title** is derived from the first line of markdown file. Make sure the first line starts with `#`.
 
 **Step 1:** create the following folder structure:
 
@@ -45,9 +22,9 @@ There is no front-matter. **Date** and **slug** are derived from the filename. *
 ├── css
 │   └── styles.css
 ├── markdown
-│   └── YYYY-MM-DD-Slug_1.md
-│   └── YYYY-MM-DD-Slug_2.md
-│   └── YYYY-MM-DD-Slug_3.md
+│   └── Slug_1.md
+│   └── Slug_2.md
+│   └── Slug_3.md
 ├── index.html
 ├── post.html
 ```
@@ -56,7 +33,7 @@ There is no front-matter. **Date** and **slug** are derived from the filename. *
 
 **Step 2:** run `underblog`.
 
-**Step 3:** Your site is generated in `public`.
+**Step 3:** Your site is generated in `public`. Posts are ordered by last modification date.
 
 ## Live preview
 
@@ -77,14 +54,6 @@ Then go to http://localhost:8080/. Changing markdown files will automatically re
 - NO template lookup logic
 - NO plugins
 - NO dependencies
-
-## Roadmap
-
-- [x] derive dates from filenames
-- [ ] RSS generation
-- [ ] Syntax highlighting for code with Chroma
-- [x] live preview server
-
 ---
 
 ## Building

@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"errors"
 	"fmt"
 	"html/template"
 	"io/ioutil"
@@ -16,7 +15,7 @@ import (
 )
 
 func NewPost(filename string) Post {
-	post, err := ExtractMetaFromFilename(filename)
+	post, err := ExtractMetaFromFile(filename)
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -78,17 +77,9 @@ func fNameWithoutExtension(fn string) string {
 	return strings.TrimSuffix(fn, path.Ext(fn))
 }
 
-func ExtractMetaFromFilename(filename string) (Post, error) {
-	errorMessage := fmt.Sprintf("can't parse filename '%s', it should be in format 'YYYY-MM-DD-slug.md'", filename)
-	dateFormat := "2006-01-02"
-	slug := fNameWithoutExtension(filename)[len(dateFormat)+1:]
-	if len(slug) == 0 {
-		return Post{}, errors.New(errorMessage)
-	}
-	date, err := time.Parse(dateFormat, filename[:len(dateFormat)])
-	if err != nil {
-		return Post{}, errors.New(errorMessage)
-	}
-
-	return Post{Slug: slug, Date: date}, nil
+func ExtractMetaFromFile(filename string) (Post, error) {
+    finfo, _ := os.Stat("./markdown/" + filename)
+    modTime := finfo.ModTime()
+    slug := fNameWithoutExtension(filename)
+    return Post{Slug: slug, Date: modTime}, nil
 }

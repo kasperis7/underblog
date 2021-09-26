@@ -44,4 +44,4 @@ install: all
 	cp release/$(NAME) $(GOPATH)/bin/
 
 build-docker:
-	docker build -t freetonik/underblog .
+	docker build -t kasperis7/underblog .
