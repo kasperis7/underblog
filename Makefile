@@ -12,15 +12,12 @@ else
   archiveCmd=tar czpvf $(NAME)-$(BUILD_NAME)-$(VERSION).tar.gz $(BUILD_NAME)
 endif
 
-all: build test targz sha move
+all: build targz sha move
 
 build:
 	go get -t ./...
 	go mod vendor
 	GO111MODULE=on CGO_ENABLED=0 go build -mod=vendor -o underblog ./app/main.go
-
-test:
-	go test -v -count 1 -race -cover ./...
 
 bench:
 	go test -v -run Bench -bench=. ./...

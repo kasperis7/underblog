@@ -78,7 +78,9 @@ func fNameWithoutExtension(fn string) string {
 }
 
 func ExtractMetaFromFile(filename string) (Post, error) {
-    finfo, _ := os.Stat("./markdown/" + filename)
+    finfo, _ := os.Stat(filepath.Join("./markdown/", filename))
+    //stat_t := finfo.Sys().(*syscall.Stat_t)
+    //ctime := time.Unix(int64(stat_t.Ctim.Sec), int64(stat_t.Ctim.Nsec))
     modTime := finfo.ModTime()
     slug := fNameWithoutExtension(filename)
     return Post{Slug: slug, Date: modTime}, nil

@@ -51,7 +51,7 @@ func TestExtractMetaFromFilename(t *testing.T) {
 		t.Run(tt.filename, func(t *testing.T) {
 			g := NewGomegaWithT(t)
 
-			post, err := ExtractMetaFromFilename(tt.filename)
+			post, err := ExtractMetaFromFile(tt.filename)
 
 			if tt.err != nil {
 				g.Expect(err).To(Equal(tt.err))
